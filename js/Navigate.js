@@ -106,6 +106,33 @@ document.addEventListener("DOMContentLoaded", function () {
 //     });
 // });
 
+// function startRdpSession(event, serverName) {
+//     event.preventDefault();
+  
+//     // Show the loading indicator
+//     const loadingIndicator = document.getElementById('loading-indicator');
+//     loadingIndicator.style.display = 'flex';
+  
+//     fetch('/start-rdp', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({ serverName })
+//     })
+//     .then(response => response.text())
+//     .then(data => {
+//       console.log(data); // Log the server response to the console
+//       // Hide the loading indicator
+//       loadingIndicator.style.display = 'none';
+//     })
+//     .catch(error => {
+//       console.error('Error:', error);
+//       // Hide the loading indicator
+//       loadingIndicator.style.display = 'none';
+//     });
+//   }
+
 function startRdpSession(event, serverName) {
     event.preventDefault();
   
@@ -113,22 +140,13 @@ function startRdpSession(event, serverName) {
     const loadingIndicator = document.getElementById('loading-indicator');
     loadingIndicator.style.display = 'flex';
   
-    fetch('/start-rdp', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ serverName })
-    })
-    .then(response => response.text())
-    .then(data => {
-      console.log(data); // Log the server response to the console
-      // Hide the loading indicator
-      loadingIndicator.style.display = 'none';
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      // Hide the loading indicator
-      loadingIndicator.style.display = 'none';
-    });
+    // Construct the RDP URL using the ms-rdp protocol
+    const rdpUrl = `ms-rdp://${serverName}`;
+  
+    // Open the RDP URL in a new window or tab
+    window.open(rdpUrl, '_blank');
+  
+    // Hide the loading indicator
+    loadingIndicator.style.display = 'none';
+	//hello
   }
